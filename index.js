@@ -1,6 +1,9 @@
 const io = require('socket.io')(8900, {
+  // cors: {
+  //   origin: 'https://client-chat-tn8z.onrender.com',
+  // },
   cors: {
-    origin: 'https://client-chat-tn8z.onrender.com',
+    origin: '*',
   },
 });
 
