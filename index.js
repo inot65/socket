@@ -32,8 +32,6 @@ const getUser = (userId) => {
 
 app.listen(8800, () => {
   console.log('Backend server is running on 8800 port...');
-  // conectare la baza de date
-  conectareMongoDb();
 
   // lansare server socket
 
