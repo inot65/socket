@@ -25,7 +25,7 @@ const getUser = (userId) => {
   return users.find((user) => user.userId === userId);
 };
 
-// lansare server socket
+
 io.on('connection', (socket) => {
   console.log('S-a conectat un utilizator.');
   // on connect
@@ -54,3 +54,4 @@ io.on('connection', (socket) => {
     io.emit('getUsers', users);
   });
 });
+
