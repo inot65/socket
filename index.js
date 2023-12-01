@@ -1,11 +1,18 @@
-const io = require('socket.io')(8900, {
-  // cors: {
-  //   origin: 'https://client-chat-tn8z.onrender.com',
-  // },
-  cors: {
-    origin: '*',
-  },
-});
+let io = '';
+
+if (process.env.NODE_ENV === 'production') {
+  io = require('socket.io')(8900, {
+    cors: {
+      origin: 'https://client-chat-tn8z.onrender.com',
+    },
+  });
+} else {
+  io = require('socket.io')(8900, {
+    cors: {
+      origin: 'http://localhost:3000/',
+    },
+  });
+}
 
 // fac o matrice a utilizatorilor conectati
 let users = [];
@@ -25,10 +32,9 @@ const getUser = (userId) => {
   return users.find((user) => user.userId === userId);
 };
 
-
 io.on('connection', (socket) => {
   console.log('S-a conectat un utilizator.');
-  // on connect
+  // on connection ->
   // iau userId si SocketId de la utilizator
   // si il introduc in matrice, DOAR DACA nu exista deja
   socket.on('addUser', (userId) => {
@@ -54,4 +60,3 @@ io.on('connection', (socket) => {
     io.emit('getUsers', users);
   });
 });
-
