@@ -8,13 +8,21 @@
 // });
 
 const express = require('express');
-const {createServer} = require('node:http');
+const {createServer} = require('node:https');
 const {join} = require('node:path');
 const {Server} = require('socket.io');
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  connectionStateRecovery: {},
+  cors: {
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? 'https://client-chat-tn8z.onrender.com'
+        : 'http://localhost:3000/',
+  },
+});
 
 app.get('/', (req, res) => {
   res.send('<h1>Server Socket.IO pt aplicatia de chat <b>-demo-</b></h1>');
