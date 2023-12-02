@@ -1,9 +1,6 @@
 const io = require('socket.io')(8900, {
   cors: {
-    origin:
-      process.env.NODE_ENV === 'production'
-        ? 'https://client-chat-tn8z.onrender.com'
-        : 'http://localhost:3000/',
+    origin: 'https://client-chat-tn8z.onrender.com',
   },
 });
 
